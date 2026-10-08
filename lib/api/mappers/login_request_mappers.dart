@@ -1,22 +1,11 @@
-
 import 'package:e_commerce/api/models/request/login_request_dto.dart';
+import 'package:e_commerce/domain/entities/request/login_request.dart';
 
-class LoginRequest {
-  final String? email;
-  final String? password;
-
-  LoginRequest ({
-    this.email,
-    this.password,
-  });
-
+extension LoginRequestMapper on LoginRequest{
   LoginRequestDto toLoginRequestDto() {
     return LoginRequestDto(
       email: email,
       password: password
     );
   }
-
 }
-
-

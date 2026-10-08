@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:e_commerce/api/api_services.dart';
+import 'package:e_commerce/api/dio_interceptors.dart';
 import 'package:e_commerce/api/end_points.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -37,9 +38,11 @@ PrettyDioLogger providePrettyDioLogger(){
  @injectable
  Dio providedDio(BaseOptions baseOptions,PrettyDioLogger prettyDioLogger) {
    var dio = Dio(baseOptions);
+   dio.interceptors.add(DioInterceptor());
    dio.interceptors.add(prettyDioLogger);
    return dio;
  }
 
- ApiServices providedApiServices(dio) => ApiServices(dio);
+ @singleton
+ ApiServices providedApiServices(Dio dio) => ApiServices(dio);
 }
